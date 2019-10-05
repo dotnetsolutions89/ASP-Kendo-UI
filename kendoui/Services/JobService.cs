@@ -29,5 +29,22 @@ namespace kendoui.Services
             _context.Jobs.Add(job);
             _context.SaveChanges();
         }
+
+        public IEnumerable<Job> GetAll()
+        {
+            return _context.Jobs.ToList();
+        }
+
+        public void Destroy(Job job)
+        {
+            var jobs = _context.Jobs.ToList();
+            var target = jobs.FirstOrDefault(e => e.JobId == job.JobId);
+
+            if (target != null)
+            {
+                _context.Remove(target);
+                _context.SaveChanges();
+            }
+        }
     }
 }
