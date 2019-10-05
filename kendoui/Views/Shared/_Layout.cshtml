@@ -1,0 +1,58 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Kendo UI</title>
+
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.3.917/styles/kendo.common-bootstrap.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.3.917/styles/kendo.bootstrap.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.3.917/styles/kendo.bootstrap.mobile.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2019.3.917/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.3.917/js/kendo.all.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.3.1029/js/jszip.min.js"></script>
+
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/lib/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-2">
+                <ul id="panelbar">
+                    <li class="k-state-active">
+                        <a asp-controller="Home" asp-action="Index">Anasayfa</a>
+                    </li>
+                    <li>
+                        Inbox
+                        <ul>
+                            <li><a asp-controller="Job" asp-action="Index">Acil İşler</a></li>
+                            <li>Normal İşler</li>
+                        </ul>
+                    </li>
+                    <li>Completed</li>
+                </ul>
+            </div>
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $("#panelbar").kendoPanelBar({
+            expandMode: "single"
+        });
+    });
+</script>
