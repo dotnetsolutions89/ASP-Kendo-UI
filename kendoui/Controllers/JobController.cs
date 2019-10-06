@@ -60,17 +60,44 @@ namespace kendoui.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Jobs_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "Data")]IEnumerable<Job> jobs)
+        public IActionResult Delete(int id)
         {
-            if (jobs.Any())
+            _service.Remove(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Jobs_Create([DataSourceRequest] DataSourceRequest request, JobViewModel job)
+        {
+            if(job != null && ModelState.IsValid)
             {
-                foreach (var job in jobs)
-                {
-                    _service.Destroy(job);
-                }
+                _service.Add(job);
             }
 
-            return Json(jobs.ToDataSourceResult(request, ModelState));
+            return Json(new[] { job }.ToDataSourceResult(request, ModelState));
+        }
+
+        [HttpPost]
+        public ActionResult Jobs_Update([DataSourceRequest] DataSourceRequest request, Job job)
+        {
+            if (job != null && ModelState.IsValid)
+            {
+                _service.Update(job);
+            }
+
+            return Json(new[] { job }.ToDataSourceResult(request, ModelState));
+        }
+
+        [HttpPost]
+        public ActionResult Jobs_Destroy([DataSourceRequest] DataSourceRequest request, Job job)
+        {
+            if (job != null)
+            {
+                _service.Destroy(job);
+            }
+
+            return Json(new[] { job }.ToDataSourceResult(request, ModelState));
         }
     }
 }

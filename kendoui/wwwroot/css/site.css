@@ -24,3 +24,11 @@
     display: inline-block;
     vertical-align: top;
 }
+
+.k-grid tbody .k-button {
+    min-width: 12px;
+    width: 27px;
+    height: 35px;
+    overflow: hidden;
+    font-size: 14px
+}

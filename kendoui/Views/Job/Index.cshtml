@@ -4,28 +4,31 @@
     .Name("Jobs")
     .Columns(columns =>
     {
-        columns.Bound(p => p.Title);
-        columns.Bound(p => p.DueDate);
-        columns.Bound(p => p.FinishDate);
-        columns.Bound(p => p.Owner);
-        columns.Command(command => command.Destroy()).Width(160);
-        columns.Command(command => command.Custom("ViewDetails")).Width(160);
-        //columns.Bound(p => p.JobId).ClientTemplate("<a href='" + @Url.Action("Create", "Invoice", new { id = "#=Id#" }) + "' class='btn btn-primary'><i class='fa fa-eye'></i>  View</a>" ).Width(90);
+        columns.Bound(p => p.Title).Title("İşin Adı");
+        columns.Bound(p => p.DueDate).Title("Bildirim Tarihi");
+        columns.Bound(p => p.FinishDate).Title("Çözüm Tarihi");
+        columns.Bound(p => p.Owner).Title("İşin Sahibi");
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+        //columns.Bound(p => p.JobId).ClientTemplate("<a href='" + @Url.Action("Delete", "Job", new { id = "#=JobId#" }) + "' class='btn btn-outline-danger'><i class='fa fa-eye'></i>  Delete</a>" ).Width(90);
 
     })
     .ToolBar(toolbar =>
     {
-        toolbar.Create();
-        toolbar.Save();
+        toolbar.Create().Text("Create");
+        toolbar.ClientTemplate("<a class='k-button k-grid-even' href='" + @Url.Action("Create", "Job") + "'><span class='k-icon k-i-plus'></span> Create</a>");
     })
     .Pageable()
     .Navigatable()
     .Sortable()
+    .Editable()
     .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(20)
         .ServerOperation(false)
-        .Destroy("Jobs_Destroy", "Jobs")
+        .Model(model => model.Id(p => p.JobId))
+        //.Create("Jobs_Create", "Job")
+        .Destroy("Jobs_Destroy", "Job")
+        .Update("Jobs_Update", "Job")
      )
 )
 

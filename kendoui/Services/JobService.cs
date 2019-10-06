@@ -35,14 +35,29 @@ namespace kendoui.Services
             return _context.Jobs.ToList();
         }
 
+        public void Update(Job job)
+        {
+            _context.Entry(GetAll().FirstOrDefault(p => p.JobId == job.JobId)).CurrentValues.SetValues(job);
+            _context.SaveChanges();
+        }
+
+        public void Remove(int id)
+        {
+            var job = _context.Jobs.Find(id);
+
+            if (job != null)
+            {
+                _context.Remove(job);
+                _context.SaveChanges();
+            }
+        }
+
         public void Destroy(Job job)
         {
-            var jobs = _context.Jobs.ToList();
-            var target = jobs.FirstOrDefault(e => e.JobId == job.JobId);
-
+            var target = GetAll().FirstOrDefault(p => p.JobId == job.JobId);
             if (target != null)
             {
-                _context.Remove(target);
+                _context.Jobs.Remove(target);
                 _context.SaveChanges();
             }
         }
