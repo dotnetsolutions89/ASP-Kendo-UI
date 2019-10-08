@@ -34,20 +34,6 @@ namespace kendoui.Controllers
             return View(model);
         }
 
-        //public ActionResult TagHelper_Jobs_Read([DataSourceRequest] DataSourceRequest request)
-        //{
-        //    var items = _context.Jobs.Select(r => new Job
-        //    {
-        //        JobId = r.JobId,
-        //        Title = r.Title,
-        //        DueDate = r.DueDate,
-        //        FinishDate = r.FinishDate,
-        //        Owner = r.Owner
-        //    });
-
-        //    return Json(items.ToDataSourceResult(request));
-        //}
-
         public IActionResult Create(JobViewModel model)
         {
             if (!ModelState.IsValid)
@@ -58,24 +44,6 @@ namespace kendoui.Controllers
             _service.Add(model);
 
             return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete(int id)
-        {
-            _service.Remove(id);
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult Jobs_Create([DataSourceRequest] DataSourceRequest request, JobViewModel job)
-        {
-            if(job != null && ModelState.IsValid)
-            {
-                _service.Add(job);
-            }
-
-            return Json(new[] { job }.ToDataSourceResult(request, ModelState));
         }
 
         [HttpPost]

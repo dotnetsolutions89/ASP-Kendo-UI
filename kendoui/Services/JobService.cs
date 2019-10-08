@@ -41,17 +41,6 @@ namespace kendoui.Services
             _context.SaveChanges();
         }
 
-        public void Remove(int id)
-        {
-            var job = _context.Jobs.Find(id);
-
-            if (job != null)
-            {
-                _context.Remove(job);
-                _context.SaveChanges();
-            }
-        }
-
         public void Destroy(Job job)
         {
             var target = GetAll().FirstOrDefault(p => p.JobId == job.JobId);

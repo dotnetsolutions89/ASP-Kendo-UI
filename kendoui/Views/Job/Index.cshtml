@@ -9,7 +9,6 @@
         columns.Bound(p => p.FinishDate).Title("Çözüm Tarihi");
         columns.Bound(p => p.Owner).Title("İşin Sahibi");
         columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
-        //columns.Bound(p => p.JobId).ClientTemplate("<a href='" + @Url.Action("Delete", "Job", new { id = "#=JobId#" }) + "' class='btn btn-outline-danger'><i class='fa fa-eye'></i>  Delete</a>" ).Width(90);
 
     })
     .ToolBar(toolbar =>
@@ -26,72 +25,7 @@
         .PageSize(20)
         .ServerOperation(false)
         .Model(model => model.Id(p => p.JobId))
-        //.Create("Jobs_Create", "Job")
         .Destroy("Jobs_Destroy", "Job")
         .Update("Jobs_Update", "Job")
      )
 )
-
-@*<kendo-datasource name="jobsGridSource" type="DataSourceTagHelperType.Ajax" server-operation="false">
-        <transport>
-            <read url="@Url.Action("TagHelper_Jobs_Read", "Jobs")" />
-        </transport>
-    </kendo-datasource>
-
-    <kendo-grid name="jobsGrid" datasource-id="jobsGridSource">
-        <pageable enabled="true"></pageable>
-        <columns>
-            <column field="Title"></column>
-            <column field="DueDate"></column>
-            <column field="FinishDate"></column>
-            <column field="Owner"></column>
-        </columns>
-        <scrollable enabled="true" />
-    </kendo-grid>*@
-
-@*<div id="grid"></div>
-
-    <script>
-        $(document).ready(function () {
-            $("#grid").kendoGrid({
-                toolbar: "<a class='btnNewRule k-button k-button-icontext' onclick='createJobHandler(this)'><span class='k-icon k-i-plus'></span>Create</a>",
-                dataSource: {
-                    data: [
-                        { JobTitle: "Veritabanı Oluşturma", DueDate: "03/10/2019", FinishDate: "04/10/2019", Owner: "BT Arge" },
-                        { JobTitle: "Bug giderme", DueDate: "04/10/2019", FinishDate: "06/10/2019", Owner: "BT Arge" }
-                    ],
-                    pageSize: 20
-                },
-                height: 550,
-                groupable: false,
-                sortable: true,
-                pageable: {
-                    refresh: true,
-                    pageSizes: true,
-                    buttonCount: 5
-                },
-                columns: [{
-                    field: "JobTitle",
-                    title: "İşin Adı"
-                }, {
-                    field: "DueDate",
-                    title: "Bildirim Tarihi"
-                }, {
-                    field: "FinishDate",
-                    title: "Çözüm Tarihi"
-                }, {
-                    field: "Owner",
-                    title: "İşin Sahibi"
-                }, {
-                    title: "",
-                        template: '<input type="button" class="btn btn-outline-info mr-3" name="edit" value="Edit"/><input type="button" class="btn btn-outline-danger" name="delete" value="Delete"/>',
-                    filterable: false,
-                    sortable: false,
-                }]
-            });
-        });
-
-        function createJobHandler(e) {
-            location.href = "job/create";
-        }
-    </script>*@
